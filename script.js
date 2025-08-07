@@ -6,10 +6,17 @@ function addTask() {
     const li = document.createElement('li');
     li.textContent = taskText;
   
+    li.onclick = () => {
+      li.style.textDecoration = li.style.textDecoration === 'line-through' ? 'none' : 'line-through';
+    };
+  
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = '❌';
     deleteBtn.style.marginLeft = '10px';
-    deleteBtn.onclick = () => li.remove();
+    deleteBtn.onclick = (e) => {
+      e.stopPropagation(); // prevent marking complete on delete
+      li.remove();
+    };
   
     li.appendChild(deleteBtn);
     document.getElementById('taskList').appendChild(li);
